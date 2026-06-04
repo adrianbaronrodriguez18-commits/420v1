@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Rincón Santo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>🎓 Bienvenido a Rincón Santo de Cajicá</h1>
+    <p class="highlight">✨ Excelencia educativa y tecnología al servicio del aprendizaje ✨</p>
+    <p>🏫 Nuestro colegio fomenta la innovación, el respeto y el desarrollo integral de los estudiantes.</p>
+    <button id="logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCvyTxZ3v-Ju4sJElAZlSiPM3KiKg7dWfE",
+      authDomain: "prueba-rincon-santo.firebaseapp.com",
+      projectId: "prueba-rincon-santo",
+      storageBucket: "prueba-rincon-santo.firebasestorage.app",
+      messagingSenderId: "623705016912",
+      appId: "1:623705016912:web:ef5880d4e86e4b62b25f55",
+      measurementId: "G-4VJDDWR0SF"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const logoutBtn = document.getElementById('logout');
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
